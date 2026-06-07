@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cody Layne | IT Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --accent: #00e5ff;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: rgba(0,229,255,0.15);
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Rajdhani', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(13,15,20,0.85);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  section { padding: 5rem 2.5rem; max-width: 900px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 6rem;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-name {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .btn:hover { background: rgba(0,229,255,0.08); }
+
+  .hero-scroll {
+    margin-top: 4rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px; height: 1px;
+    background: var(--muted);
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,229,255,0.015) 2px, rgba(0,229,255,0.015) 4px);
+    pointer-events: none;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: rgba(0,229,255,0.4); transform: translateY(-2px); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  .project-folder {
+    font-size: 1.5rem;
+    color: var(--accent);
+  }
+  .project-links a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .project-links a:hover { color: var(--accent); }
+
+  .project-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .tag::before { content: '#'; opacity: 0.5; }
+
+  /* CONTACT */
+  #contact { border-top: 1px solid var(--border); }
+  .contact-text {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 440px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .contact-email {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">&gt; codylayne-dev.github.io</span>
+  <div class="nav-links">
+    <a href="#projects">projects</a>
+    <a href="#contact">contact</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <p class="hero-label">// Layne's Kitchen</p>
+  <h1 class="hero-name">Cody Layne</h1>
+  <p class="hero-role">System Admin &amp; Aspiring Tech Professional</p>
+  <p class="hero-desc">3 months in and already building things. Passionate about learning how technology works from the ground up.</p>
+  <a href="#projects" class="btn">view my projects &rarr;</a>
+  <p class="hero-scroll">scroll to explore</p>
+</section>
+
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">01.</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-folder">&#9635;</span>
+        <div class="project-links"><a href="#">[ view ]</a></div>
+      </div>
+      <h3 class="project-title">Project One</h3>
+      <p class="project-desc">A short description of what this project does and what I learned building it.</p>
+      <div class="project-tags">
+        <span class="tag">html</span>
+        <span class="tag">css</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-folder">&#9635;</span>
+        <div class="project-links"><a href="#">[ view ]</a></div>
+      </div>
+      <h3 class="project-title">Project Two</h3>
+      <p class="project-desc">A short description of what this project does and what I learned building it.</p>
+      <div class="project-tags">
+        <span class="tag">python</span>
+        <span class="tag">cli</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <span class="project-folder">&#9635;</span>
+        <div class="project-links"><a href="#">[ view ]</a></div>
+      </div>
+      <h3 class="project-title">This Portfolio</h3>
+      <p class="project-desc">A short description of what this project does and what I learned building it.</p>
+      <div class="project-tags">
+        <span class="tag">html</span>
+        <span class="tag">css</span>
+        <span class="tag">github-pages</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">02.</span>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-line"></div>
+  </div>
+  <p class="contact-text">Currently learning and open to opportunities. Want to connect, collaborate, or just talk tech?</p>
+  <a href="mailto:you@email.com" class="contact-email">you@email.com</a>
+</section>
+
+<footer>
+  &copy; 2026 &mdash; Your Name &mdash; built with GitHub Pages
+</footer>
+
+</body>
+</html>
